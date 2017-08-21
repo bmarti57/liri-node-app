@@ -74,7 +74,7 @@ function spotifyThis() {
                 console.log("Artist: " + data.tracks.items[0].artists[0].name);                
                 console.log("Title: " + data.tracks.items[0].name);
                 console.log("Preview URL: " + data.tracks.items[0].preview_url);
-                console.log("Album: " + data.items[0].album);                
+                console.log("Album: " + data.tracks.items[0].album.name);                
             });
         } else {    
                 spotify.search({
@@ -128,3 +128,15 @@ function omdb() {
 }//end omdb function    
 
 //Do What it Says
+function says() {
+    fs.readFile("random.txt", "utf8", function(error, data) {
+        if (error) {
+            console.log(error);
+        } else {
+            var spotifyArray = data.split(",");
+            action = spotifyArray[0];
+            value = spotifyArray[1];
+            spotifyThis(spotifyArray[0], spotifyArray[1]);
+        }
+    });//readFile
+}//end says function
